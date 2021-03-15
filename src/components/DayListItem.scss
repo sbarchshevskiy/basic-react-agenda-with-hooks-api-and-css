@@ -1,7 +1,7 @@
 @import "styles/mixins.scss";
 @import "styles/variables.scss";
 
-.button {
+.dayListItem {
   border-radius: 1rem;
   border: 0;
   font-size: 1.5rem;
@@ -16,7 +16,7 @@
   background-color: transparent;
 }
 
-.button:hover {
+.name:hover {
   @include button-active;
 
   color: $black;
@@ -24,40 +24,25 @@
   border: 2px solid transparent;
 }
 
-.button--danger {
+.spots {
   color: $danger-color;
   border-color: $danger-color;
   background-color: transparent;
 }
 
-.button--confirm {
+.full {
   color: $confirm-color;
   border-color: $confirm-color;
   background-color: transparent;
 }
 
-.button--danger:hover {
+.day {
   color: $white;
   background-color: $danger-color;
 }
 
-.button--confirm:hover {
+.setDay {
   color: $white;
   background-color: $confirm-color;
 }
 
-.button:last-of-type {
-  margin-right: 0;
-}
-
-.button:focus {
-  outline: none;
-}
-
-.button:disabled {
-  border-style: solid;
-  border-color: $white;
-  color: $white;
-  background-color: transparent;
-  opacity: 0.7;
-}
