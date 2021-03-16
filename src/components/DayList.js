@@ -1,27 +1,31 @@
 import React from "react";
-const classNames = require('classnames');
+import DayListItem from './DayListItem'
+
 
 
 export default function DayList(props) {
 
-   const dayListClass = classNames("dayList", {
-      'days': props.Array,
-      'day': props.String,
-      'selected': props.Boolean,
-      'setDay': props.function((nameDay) => {return nameDay})
-   });
    return (
-      <dayList
-         className={dayListClass}
-         days={props.days}
-         selected={props.name === props.day}
-         setDay={props.setDay}
-
-      >
-         {props.children}
-      </dayList>
+      <div class="DayListItem">
+        {
+          props.days.map(day => (
+            <DayListItem
+            name={day.name}
+            spots={day.spots}
+            selected={day.name === props.name}
+            setDay={props.setDay}
+            />
+          ))
+        }
+      </div>
    );
-
-
-
 }
+
+
+// <DayList>
+// className={dayListClass}
+// days={props.days}
+// selected={props.name === props.day}
+// setDay={props.setDay}
+// {props.children}
+// </DayList>
