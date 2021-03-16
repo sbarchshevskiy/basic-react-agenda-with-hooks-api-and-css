@@ -2,6 +2,7 @@
 import "components/DayListItem.scss"
 import "components/Application.scss";
 import "components/InterviewerListItem.scss";
+import "components/InterviewerList.scss";
 import DayList from "./DayList";
 import React, { useState } from "react";
 
