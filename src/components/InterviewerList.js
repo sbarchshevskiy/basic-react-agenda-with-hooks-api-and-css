@@ -12,6 +12,8 @@ export default function InterviewerList(props) {
           id={interviewers.id}
           name={interviewers.name}
           avatar={interviewers.avatar} 
+          selected={interviewers.id === props.interviewers}
+          setInterviewer={(event) => props.setInterviewer(interviewers.id)}
         />
       ))
     }
