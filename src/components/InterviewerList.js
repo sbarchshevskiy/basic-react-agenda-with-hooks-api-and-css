@@ -7,11 +7,11 @@ export default function InterviewerList(props) {
   return (
     <section className="interviewers">{
 
-      props.interviewers.map(interviewer => (
+      props.interviewers.map(interviewers => (
         <InterviewerListItem
-          id={interviewer.id}
-          name={interviewer.name}
-          avatar={interviewer.avatar} 
+          id={interviewers.id}
+          name={interviewers.name}
+          avatar={interviewers.avatar} 
         />
       ))
     }

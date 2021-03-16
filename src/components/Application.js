@@ -4,6 +4,7 @@ import "components/Application.scss";
 import "components/InterviewerListItem.scss";
 import "components/InterviewerList.scss";
 import DayList from "./DayList";
+import InterviewerList from "./InterviewerList"
 import React, { useState } from "react";
 
 
@@ -25,16 +26,21 @@ const days = [
   },
 ];
 
-const interviewer = {
-  id: 1,
-  name: "Sylvia Palmer",
-  avatar: "https://i.imgur.com/LpaY82x.png"
-};
+
+const interviewers = [
+  { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
+  { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
+  { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
+  { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
+  { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
+];
+
 
 
 export default function Application(props) {
 
   const [day, setDay] = useState('Monday');
+  const [interviewer, setInterviewer] = useState('Sylvia Palmer');
 
   return (
     <main className="layout">
@@ -52,14 +58,7 @@ export default function Application(props) {
             day={day}
             setDay={day => console.log(day)}
           />
-
         </nav>
-        <img
-          className="sidebar__lhl sidebar--centered"
-          src="images/lhl.png"
-          alt="Lighthouse Labs"
-        />
-
 
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
@@ -74,6 +73,15 @@ export default function Application(props) {
           />
         Sylvia Palmer
       </li>
+
+      <InterviewerList
+      interviewers={interviewers}
+      interviewer={interviewer}
+      id={interviewers}
+      setInterviewer={interviewer => console.log(interviewer)}
+      
+      
+      />
 
 
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}

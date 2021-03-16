@@ -2,8 +2,6 @@ import React from "react";
 import DayListItem from './DayListItem';
 
 
-
-
 export default function DayList(props) {
 
    return (
@@ -22,11 +20,3 @@ export default function DayList(props) {
    );
 }
 
-
-// <DayList>
-// className={dayListClass}
-// days={props.days}
-// selected={props.name === props.day}
-// setDay={props.setDay}
-// {props.children}
-// </DayList>
