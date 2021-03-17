@@ -124,10 +124,7 @@ export default function Application(props) {
 
       <section className="schedule">
 
-        props.appointments.map(app => (
-         
-        ))
-
+ 
         <li className="interviewers__item">
           <img
             className="interviewers__item-image"
