@@ -1,30 +1,34 @@
-const state = {
-  days: [
-    {
-      id: 1,
-      name: "Monday",
-      appointments: [1, 2, 3]
-    },
-    {
-      id: 2,
-      name: "Tuesday",
-      appointments: [4, 5]
-    }
-  ]
+import React from "react";
+
+export function getAppointmentsForDay(state, day) {
+
+  const aptsForDay = state.days.find(findDay => findDay.name === day)
+
+  if (aptsForDay === undefined){
+    return [];
+  } else {
+    const appointments = aptsForDay.appointments.map(aptId =>
+      state.appointments[aptId])
+      return appointments;
+  }
 }
 
-console.log(state.days);
+export function getInterview(state, interview) {
+  if(interview !== null) {
+    const interviewerId = interview.interviewer;
+    const specificInterviewer = state.interviewers[interviewerId];
+    const specificStudent = interview.student;
 
+    const resultObject = {
+      interviewer: specificInterviewer,
+      student: specificStudent
+    }
+    return resultObject;
 
-const testFunction = function(state, day){
-
-  const days = state.days;
-
-  for (let day in state) {
-    console.log(state[day]);
+  } else {
+    return null;
   }
 
 
 }
 
-console.log(testFunction(state, "Monday"));

@@ -4,69 +4,13 @@ import "components/Application.scss";
 import "components/InterviewerListItem.scss";
 import "components/InterviewerList.scss";
 import Appointment from "components/Appointment";
+import { getAppointmentsForDay, getInterview } from 'helpers/selectors';
+
+
 import DayList from "./DayList";
 import InterviewerList from "./InterviewerList"
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
-
-
-// const appointments = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 3,
-//     time: "3pm",
-//     interview: {
-//       student: "Vinny Pooh",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 4,
-//     time: "5pm",
-//     interview: {
-//       student: "Ducky Duck",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 5,
-//     time: "7pm",
-//     interview: {
-//       student: "Snaky Snake",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   }
-// ];
-
-
 
 
 const interviewers = [
@@ -77,49 +21,53 @@ const interviewers = [
   { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
 ];
 
-
-
 export default function Application(props) {
-
   const [state, setState] = useState({
 
-    day: "Monday",
+    day: "Tuesday",
     days: [],
     appointments: {}
   });
 
-  const dailyAppointments = [];
+  const appointments = getAppointmentsForDay(state, state.day);
 
-  // dailyAppointments.map(appointment => )
+  console.log('apts ',appointments);
 
-  // const setDays = (days) => {
-  //   setState({...state, days})
-  // }
-
-  Promise.all([
-    axios.get('http://localhost:8001/api/days')
-    
-  ]).then((all) => {
-    console.log(all[0]); // first
-    console.log(all[1]); // second
-    console.log(all[2]); // third
-  
-    const [first, second, third] = all;
-  
-    console.log(first, second, third);
+  const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    console.log('appointment from ap: ', appointment);
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        // interview={{student: appointment.interview.student}}
+        interview={interview}
+      />
+    );
   });
 
+  console.log('schedule: ',schedule);
+
+  const dailyAppointments = [];
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8001/api/days')
-      // .then(res => setDays(res.data))
+    Promise.all([
+      // 0: Object { id: 1, name: "Monday", spots: 4, … }​​
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments'),
+      axios.get('http://localhost:8001/api/interviewers')
 
-  }, []);
+    ]).then((all) => {
+      setState(prev => ({ ...state, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+      console.log('days: ', all[0]);
+      console.log('appointments: ', all[1]);
+      console.log('interviewers', all[2]);
+    });
+  }, [])
 
   return (
     <main className="layout">
-
       <section className="sidebar">
         <img
           className="sidebar--centered"
@@ -131,33 +79,15 @@ export default function Application(props) {
           <DayList
             days={state.days}
             day={state.day}
-            
           />
         </nav>
-
-
-
-
-
-
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
 
       <section className="schedule">
 
-        {
-          dailyAppointments.map(appointment => (
-            <Appointment
-            id={appointment.id}
-            time={appointment.time}
-            interview={appointment.interview}
-            />
-
-          ))
-        }
-
-
-       
+        {schedule}
+        <Appointment id="last" time="1pm" />
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
       </section>
     </main>
