@@ -32,8 +32,8 @@ export default function Appointment(props) {
           onAdd={() => {
             console.log("Clicked onAdd")
             transition(CREATE);
-
           }}
+
         />
       }
 
@@ -49,6 +49,8 @@ export default function Appointment(props) {
        mode === CREATE && 
         < Form 
         interviewers={[]}
+        onClick={[]}
+        
         
         />
       }

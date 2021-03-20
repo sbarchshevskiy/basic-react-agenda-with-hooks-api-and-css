@@ -29,6 +29,18 @@ export function getInterview(state, interview) {
     return null;
   }
 
+}
 
+export function getInterviewersForDay(state, day) {
+
+  const aptsForDay = state.days.find(findDay => findDay.name === day)
+
+  if (aptsForDay === undefined){
+    return [];
+  } else {
+    const interviewers = aptsForDay.appointments.map(aptId =>
+      state.interviewers[aptId])
+      return interviewers;
+  }
 }
 
