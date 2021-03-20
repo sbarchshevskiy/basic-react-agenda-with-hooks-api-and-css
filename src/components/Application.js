@@ -58,6 +58,15 @@ useEffect(() => {
     console.log('id and interview ',id, interview);
   }
 
+  function cancelInterview (id, interview) {
+
+    if ({...state.appointment[id]} 
+      && {interview : {interview}}) {
+      return null;
+    } 
+
+  }
+
   const interviewers = getInterviewersForDay(state, state.day)
 
   const schedule = appointments.map((appointment) => {
@@ -69,6 +78,7 @@ useEffect(() => {
         id={appointment.id}
         time={appointment.time}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
         interviewers={interviewers}
         // interview={{student: appointment.interview.student}}
         interview={interview}
@@ -78,7 +88,7 @@ useEffect(() => {
 
   console.log('schedule: ',schedule);
 
-  const dailyAppointments = [];
+  // const dailyAppointments = [];
 
   useEffect(() => {
     Promise.all([

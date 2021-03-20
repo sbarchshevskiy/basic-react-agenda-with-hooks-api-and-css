@@ -14,6 +14,7 @@ export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
+  const CONFIRM = "CONFIRM"
 
 
   const { mode, transition, back } = useVisualMode(
@@ -26,9 +27,14 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    props.bookInterview(interviewer, interview)
+    props.bookInterview(name, interviewer)
     
   }
+
+  function cancel(id, interviewer) {
+    props.cancelInterview(id, interviewer)
+  }
+
 
 
   return (
@@ -61,6 +67,7 @@ export default function Appointment(props) {
         < Form
           interviewers={props.interviewers}
           onSave={save}
+          onCancel={cancel}
           transition={transition}
         />
       }
