@@ -24,7 +24,7 @@ const interviewers = [
 export default function Application(props) {
   const [state, setState] = useState({
 
-    day: "Tuesday",
+    day: "Monday",
     days: [],
     appointments: {}
   });
