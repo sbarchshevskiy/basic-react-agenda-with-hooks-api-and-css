@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import '../Appointment/styles.scss'
 import Header from 'components/Appointment/Header';
 import Show from 'components/Appointment/Show';
@@ -8,7 +8,7 @@ import Status from 'components/Appointment/Status';
 import useVisualMode from 'hooks/useVisualMode'
 import Form from 'components/Appointment/Form';
 import Confirm from 'components/Appointment/Confirm';
-
+import axios from 'axios';
 
 
 
@@ -30,7 +30,14 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
 
   );
-
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+      transition(SHOW)
+    }
+    if (props.interview === null && mode === SHOW) {
+      transition(EMPTY)
+    }
+  }, [transition, mode, props.interview])
 
   function save(name, interviewer) {
     const interview = {
@@ -38,11 +45,19 @@ export default function Appointment(props) {
       interviewer
     };
     transition(SAVE);
-
-    props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
+    axios
+    .put(`http://localhost:8001/api/appointments/${props.id}`, {
+      interview
+    })
+    .then(response => {
+      props.bookInterview(props.id, interview)
+      transition(SHOW)
+    })
+    .catch(error => {
+      console.log("error.mesage: ", error.message)
+      transition(ERROR_SAVE, true)
+    })
+   
   }
 
   function deleteApp() {
@@ -60,7 +75,7 @@ export default function Appointment(props) {
         bookInterview={props.bookInterview}
         time={props.time}
       />
-      {
+      {mode === EMPTY && 
         <Empty
           // bookInterview={props.bookInterview}
           onAdd={() => {

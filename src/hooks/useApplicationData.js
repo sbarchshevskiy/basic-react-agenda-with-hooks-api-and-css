@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-export default function useApplicationData(props) {
+export default function useApplicationData() {
 
   const [state, setState] = useState({
     day: "Monday",
@@ -11,34 +11,33 @@ export default function useApplicationData(props) {
     appointments: {}
   });
 
-  function cancelInterview (id, interview) {
-
-    if ({...state.appointment[id]} 
-      && {interview : {interview}}) {
-      return null;
-    } 
-    return id;
-  }
-
-
-  const spotsRemaining = function(numberOfSpots, appointments, appointmentId, days) {
-     
-    for (let day in days) {
-      if (cancelInterview(appointments[appointments])) {
-
-
-      }
-    }
-
+ function setDay(day) {
+    return setState(prev => ({ ...prev, day:day}))
   }
 
 
 
+  function cancelInterview (id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null 
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    // console.log('id and interview ',id, interview);
+    
+    setState(prev => ({ ...prev, appointments}))
+    let days = spotsRemaining(state, appointments) 
+    setState(prev => ({ ...prev, days}))
+  }
 
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview }
+      interview: interview 
     };
 
     const appointments = {
@@ -46,18 +45,33 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
     console.log('id and interview ',id, interview);
-
-    axios.put(`http://localhost:8001/api${id}`)
-    .then((resolve) => {
-      setState(({ ...state }))
-
-    })
+    
+    setState(prev => ({ ...prev, appointments}))
+    let days = spotsRemaining(state, appointments) 
+    setState(prev => ({ ...prev, days}))
   }
 
 
+  const spotsRemaining = function(state, appointments) {
 
+    const updatedDays = state.days.map(day => {
+      let numberOfInterviews = 0;
+      for (let ap of day.appointments) {
+        console.log(ap)
+        console.log(appointments)
+        if (appointments[ap].interview) {
+          numberOfInterviews += 1;
 
+        }
+      }
+      console.log(numberOfInterviews)
+      return {...day, spots: 5 - numberOfInterviews};
 
+    })
+    return updatedDays;
+
+  }
+ 
   useEffect(() => {
     Promise.all([
       // 0: Object { id: 1, name: "Monday", spots: 4, … }​​
@@ -74,5 +88,5 @@ export default function useApplicationData(props) {
   }, [])
 
 
-  return { bookInterview, cancelInterview, useEffect, spotsRemaining };
+  return { state, setDay, bookInterview, cancelInterview };
 }

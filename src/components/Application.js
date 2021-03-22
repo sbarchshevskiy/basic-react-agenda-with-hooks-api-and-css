@@ -4,8 +4,8 @@ import "components/Application.scss";
 import "components/InterviewerListItem.scss";
 import "components/InterviewerList.scss";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay, useApplicationData } from 'helpers/selectors';
-
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
+import  useApplicationData from '../hooks/useApplicationData';
 
 import DayList from "./DayList";
 import InterviewerList from "./InterviewerList"
@@ -37,13 +37,13 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day)
 
 
-useEffect(() => {
+// useEffect(() => {
 
-  setState({
-    ...state,
-    appointments
-  });
-}, [])
+//   setState({
+//     ...state,
+//     appointments
+//   });
+// }, [])
 
 
   const schedule = appointments.map((appointment) => {
@@ -80,6 +80,7 @@ useEffect(() => {
           <DayList
             days={state.days}
             day={state.day}
+            setDay={setDay}
           />
         </nav>
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
