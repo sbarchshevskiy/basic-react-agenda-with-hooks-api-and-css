@@ -4,7 +4,7 @@ import "components/Application.scss";
 import "components/InterviewerListItem.scss";
 import "components/InterviewerList.scss";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
+import { getAppointmentsForDay, getInterview, getInterviewersForDay, useApplicationData } from 'helpers/selectors';
 
 
 import DayList from "./DayList";
@@ -23,18 +23,13 @@ const interviewers = [
 
 export default function Application(props) {
 
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: {}
-  });
-  // when creates a helper function
-  // const {
-  //   state,
-  //   setDay,
-  //   bookInterview,
-  //   cancelInterview
-  // } = useApplicationData();
+  // comes from helper functions
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
 
 
   const appointments = getAppointmentsForDay(state, state.day);
@@ -49,32 +44,6 @@ useEffect(() => {
     appointments
   });
 }, [])
-
-
-  function bookInterview(id, interview) {
-
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-      
-    console.log('id and interview ',id, interview);
-  }
-
-  function cancelInterview (id, interview) {
-
-    if ({...state.appointment[id]} 
-      && {interview : {interview}}) {
-      return null;
-    } 
-
-  }
 
 
   const schedule = appointments.map((appointment) => {
@@ -96,21 +65,7 @@ useEffect(() => {
 
   console.log('schedule: ',schedule);
 
-  // const dailyAppointments = [];
-  useEffect(() => {
-    Promise.all([
-      // 0: Object { id: 1, name: "Monday", spots: 4, … }​​
-      axios.get('http://localhost:8001/api/days'),
-      axios.get('http://localhost:8001/api/appointments'),
-      axios.get('http://localhost:8001/api/interviewers')
 
-    ]).then((all) => {
-      setState(prev => ({ ...state, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-      console.log('days: ', all[0]);
-      console.log('appointments: ', all[1]);
-      console.log('interviewers', all[2]);
-    });
-  }, [])
 
   return (
     <main className="layout">
