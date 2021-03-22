@@ -22,15 +22,24 @@ const interviewers = [
 ];
 
 export default function Application(props) {
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {}
-
   });
+  // when creates a helper function
+  // const {
+  //   state,
+  //   setDay,
+  //   bookInterview,
+  //   cancelInterview
+  // } = useApplicationData();
 
 
   const appointments = getAppointmentsForDay(state, state.day);
+
+  const interviewers = getInterviewersForDay(state, state.day)
 
 
 useEffect(() => {
@@ -67,7 +76,6 @@ useEffect(() => {
 
   }
 
-  const interviewers = getInterviewersForDay(state, state.day)
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -89,7 +97,6 @@ useEffect(() => {
   console.log('schedule: ',schedule);
 
   // const dailyAppointments = [];
-
   useEffect(() => {
     Promise.all([
       // 0: Object { id: 1, name: "Monday", spots: 4, … }​​
