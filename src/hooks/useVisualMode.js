@@ -14,6 +14,7 @@ export default function useVisualMode (initial) {
       historyCopy.pop();
       historyCopy.push(newMode)
       setHistory(historyCopy);
+      return historyCopy;
     } 
     
   }

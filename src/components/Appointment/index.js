@@ -76,7 +76,6 @@ export default function Appointment(props) {
       />
       {mode === EMPTY && 
         <Empty
-          // bookInterview={props.bookInterview}
           onAdd={() => {
             console.log("Clicked onAdd")
             transition(CREATE);
@@ -94,6 +93,7 @@ export default function Appointment(props) {
       {
         mode === CREATE &&
         < Form
+        
           interviewers={props.interviewers}
           onSave={save}
           onCancel={deleteApp}
