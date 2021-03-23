@@ -27,7 +27,6 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    // console.log('id and interview ',id, interview);
     
     setState(prev => ({ ...prev, appointments}))
     let days = spotsRemaining(state, appointments) 
@@ -44,7 +43,6 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    console.log('id and interview ',id, interview);
     
     setState(prev => ({ ...prev, appointments}))
     let days = spotsRemaining(state, appointments) 

@@ -5,19 +5,30 @@ const classNames = require('classnames');
 
 export default function IntereviewerListItem(props) {
 
-  const InterviewerListItemClass = classNames("interviewers__item", {
-    'interviewers__item--selected': props.selected,
+  const 
+  { 
+    selected, 
+    avatar, 
+    name, 
+    setInterviewer 
+
+  } = props;
+
+  const InterviewerListItemClass = classNames(
+    "interviewers__item", {
+    'interviewers__item--selected': selected,
 
   })
 
   return (
-    <li className={InterviewerListItemClass} onClick={props.setInterviewer}>  
+    <li className={InterviewerListItemClass} 
+      onClick={setInterviewer}>  
       <img
         className="interviewers__item-image"
-        src={props.avatar}
-        alt={props.name}  
+        src={avatar}
+        alt={name}  
       />
-      {props.selected && props.name}
+      {selected && name}
     </li>
   )
 }

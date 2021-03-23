@@ -33,17 +33,8 @@ export default function Application(props) {
 
 
   const appointments = getAppointmentsForDay(state, state.day);
-
   const interviewers = getInterviewersForDay(state, state.day)
 
-
-// useEffect(() => {
-
-//   setState({
-//     ...state,
-//     appointments
-//   });
-// }, [])
 
 
   const schedule = appointments.map((appointment) => {
@@ -57,7 +48,6 @@ export default function Application(props) {
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
         interviewers={interviewers}
-        // interview={{student: appointment.interview.student}}
         interview={interview}
       />
     );
@@ -83,14 +73,12 @@ export default function Application(props) {
             setDay={setDay}
           />
         </nav>
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
 
       <section className="schedule">
 
         {schedule}
         <Appointment id="last" time="5pm" />
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
       </section>
     </main>
   );

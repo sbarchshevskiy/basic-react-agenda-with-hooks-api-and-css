@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import '../Appointment/styles.scss'
 import Header from 'components/Appointment/Header';
 import Show from 'components/Appointment/Show';
@@ -46,38 +46,42 @@ export default function Appointment(props) {
     };
     transition(SAVE);
     axios
-    .put(`http://localhost:8001/api/appointments/${props.id}`, {
-      interview
-    })
-    .then(response => {
-      props.bookInterview(props.id, interview)
-      transition(SHOW)
-    })
-    .catch(error => {
-      console.log("error.mesage: ", error.message)
-      transition(ERROR_SAVE, true)
-    })
+      .put(`http://localhost:8001/api/appointments/${props.id}`, {
+        interview
+      })
+      .then(response => {
+        props.bookInterview(props.id, interview)
+        transition(SHOW)
+      })
+      .catch(error => {
+        console.log("error.mesage: ", error.message)
+        transition(ERROR_SAVE, true)
+      })
   }
 
 
   function deleteApp() {
     transition(DELETE, true)
-    props.cancelInterview(props.id)
-      .then(() => transition(EMPTY))
+    axios
+      .delete(`http://localhost:8001/api/appointments/${props.id}`)
+      .then(response => {
+        props.cancelInterview(props.id)
+        console.log('axios confirm deleted ', response);
+        transition(EMPTY)
+      })
       .catch(err => transition(ERROR_DELETE, true))
+    console.log('error');
   }
 
 
   return (
     <article className="appointment">
       < Header
-        bookInterview={props.bookInterview}
         time={props.time}
       />
-      {mode === EMPTY && 
+      {mode === EMPTY &&
         <Empty
           onAdd={() => {
-            console.log("Clicked onAdd")
             transition(CREATE);
           }}
         />
@@ -87,52 +91,73 @@ export default function Appointment(props) {
         < Show
           interviewer={props.interview.interviewer.name}
           student={props.interview.student}
-          avatar={props.avatar}
+          onEdit={() => {
+            console.log('pressed edit');
+            transition(SHOW)
+          }}
+          onDelete={() => {
+            console.log('pressed delete');
+            transition(CONFIRM)
+          }}
+
         />
       }
       {
         mode === CREATE &&
         < Form
-        
           interviewers={props.interviewers}
           onSave={save}
-          onCancel={deleteApp}
-          transition={transition}
+          onCancel={back}
         />
       }
       {
         mode === CONFIRM &&
+        // confirm deletion
         < Confirm
-          onSave={save}
+          prompt={'will be deleted'}
+          onConfirm={deleteApp}
           onCancel={back}
         />
 
       }
       {
+        mode === SAVE &&
+        // confirm reservation
+        < Status
+         prompt={'saving appointment'}
+        
+        />
+      }
+      {
         mode === EDIT &&
         < Form
           name={props.interview.student}
+          interviewers={props.interviewers}
           interviewer={props.interview.interviewer.id}
           onSave={save}
           onCancel={back}
+          
         />
       }
       {
         mode === DELETE &&
         < Status
-        onCancel={back}
+          prompt={'deleting'}
         />
       }
       {
         mode === ERROR_SAVE &&
         < Error
-        onCancel={back}
+          prompt={'error while saving'}
+          onClose={back}
+
         />
       }
       {
         mode === ERROR_DELETE &&
         < Error
-        onCancel={back}
+        prompt={'error while deleting'}
+        onClose={back}
         />
       }
     </article>
