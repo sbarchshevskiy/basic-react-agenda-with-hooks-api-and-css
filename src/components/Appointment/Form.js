@@ -8,6 +8,7 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  console.log('props     =>', props);
 
   function reset() {
     setName("")
@@ -43,6 +44,7 @@ export default function Form(props) {
             data-testid="student-name-input"
           />
         </form>
+        
         <section className="appointment__validation">{error}</section>
 
         <InterviewerList 

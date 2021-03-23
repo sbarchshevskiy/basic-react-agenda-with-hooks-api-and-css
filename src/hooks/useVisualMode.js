@@ -9,27 +9,33 @@ export default function useVisualMode (initial) {
 
 
   const transition = (newMode, update = false) => {
-    if (setMode(newMode) && update === true){
-      const historyCopy = [...history];
-      historyCopy.pop();
-      historyCopy.push(newMode)
-      setHistory(historyCopy);
-      return historyCopy;
-    } 
-    
+    setMode(newMode)
+    setHistory(prev => {
+      if (!update) {
+        return [...prev, newMode];
+      }
+      const updHisObj = [...prev];
+      updHisObj.pop();
+      updHisObj.push(newMode);
+      return updHisObj;
+    })
   }
 
-  const back = (currentPos, prevPos) => {
+  const back = (currentPos) => {
     currentPos = history.length;
-    if (currentPos > 1) {
-      const historyCopy = [...history];
-      historyCopy.pop();
-      historyCopy.push(prevPos);
-      setHistory(historyCopy);
+    if (currentPos <= 1) {
+      return;
     }
-    
+    let updHisObj;
+    updHisObj = [...history];
+    updHisObj.pop();
+    let moveBack;
+    moveBack = updHisObj[updHisObj.length - 1];
+    setMode(moveBack);
+    setHistory(updHisObj);
+
   }
 
-  return  { mode, transition, back };
+  return  { mode, transition, back};
 
 }

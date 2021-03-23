@@ -72,7 +72,6 @@ export default function useApplicationData() {
  
   useEffect(() => {
     Promise.all([
-      // 0: Object { id: 1, name: "Monday", spots: 4, … }​​
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')

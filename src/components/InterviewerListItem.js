@@ -19,6 +19,7 @@ export default function IntereviewerListItem(props) {
     'interviewers__item--selected': selected,
 
   })
+  console.log('selected ===>', name);
 
   return (
     <li className={InterviewerListItemClass} 
