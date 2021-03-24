@@ -7,12 +7,14 @@ import InterviewerListItem from './InterviewerListItem';
 
 function InterviewerList(props) {
 
+  
+  console.log('props from inter.list ',props);
   const interviewersCurated = props.interviewers.map(int => (
     <InterviewerListItem
       key={int.id}
       name={int.name}
       avatar={int.avatar}
-      selected={int.id === props.int}
+      selected={int.id === props.interviewer}
       setInterviewer={(event) => props.setInterviewer(int.id)}
     />
   ))

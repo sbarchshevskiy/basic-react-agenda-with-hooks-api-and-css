@@ -1,3 +1,5 @@
+import { pullAt } from "cypress/types/lodash";
+
 const fixtures = {
   days: [
     {
@@ -81,5 +83,14 @@ export default {
         data: fixtures.interviewers
       });
     }
+  }),
+
+  put: jest.fn(url => {
+    return Promise.resolve({
+      status: 200,
+      statusText: "OK",
+    });
+
   })
+
 }

@@ -25,7 +25,10 @@ export default function Application(props) {
 
 
   const appointments = getAppointmentsForDay(state, state.day);
-  const interviewers = getInterviewersForDay(state, state.day)
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  console.log('interviewers in app.js: ',interviewers)
+  console.log('state => ', state, 'state.day => ', state.day)
 
 
 
