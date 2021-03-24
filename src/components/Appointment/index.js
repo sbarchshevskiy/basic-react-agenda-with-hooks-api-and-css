@@ -21,7 +21,7 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM"
   const EDIT = "EDIT";
   const DELETE = "DELETE";
-  const SAVE = "SAVE";
+  const SAVING = "SAVING";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
@@ -44,7 +44,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    transition(SAVE);
+    transition(SAVING);
     axios
       .put(`http://localhost:8001/api/appointments/${props.id}`, {
         interview
@@ -75,7 +75,7 @@ export default function Appointment(props) {
 
 
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       < Header
         time={props.time}
       />
@@ -122,10 +122,10 @@ export default function Appointment(props) {
 
       }
       {
-        mode === SAVE &&
+        mode === SAVING &&
         // confirm reservation
         < Status
-         prompt={'saving appointment'}
+         prompt={"Saving"}
         
         />
       }
@@ -143,7 +143,7 @@ export default function Appointment(props) {
       {
         mode === DELETE &&
         < Status
-          prompt={'deleting'}
+          prompt={'Deleting'}
         />
       }
       {
