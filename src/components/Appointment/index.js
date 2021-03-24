@@ -93,7 +93,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           onEdit={() => {
             console.log('pressed edit');
-            transition(SHOW)
+            transition(EDIT)
           }}
           onDelete={() => {
             console.log('pressed delete');
@@ -101,6 +101,8 @@ export default function Appointment(props) {
           }}
 
         />
+
+        
       }
       {
         mode === CREATE &&

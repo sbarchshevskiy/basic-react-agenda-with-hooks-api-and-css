@@ -99,17 +99,18 @@ describe("Application", () => {
     
     fireEvent.change(getByPlaceholderText(container, "Enter Student Name"));
 
-    fireEvent.click(queryByAltText(container, "Lydia Miller-Jones"));
+    fireEvent.click(queryByAltText(container, "Tori Malcolm"));
   
     expect(
-      getByText(container, "Saving")
+      getByText(container, "Save")
     ).toBeInTheDocument();
   
     
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")
     );
-  
+    
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 
     debug();
 

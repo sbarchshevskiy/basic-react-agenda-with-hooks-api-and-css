@@ -32,7 +32,7 @@ export default function Form(props) {
 
   return (
     <main className="appointment__card appointment__card--create">
-      <section className="appointment__card-left">
+      <section className="appointment__card-left" data-testid="appointment">
         <form autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
@@ -42,6 +42,8 @@ export default function Form(props) {
             value={name}
             onChange={event => setName(event.target.value)}
             data-testid="student-name-input"
+            
+
           />
         </form>
         
