@@ -11,8 +11,6 @@ import Confirm from 'components/Appointment/Confirm';
 import axios from 'axios';
 
 
-
-
 export default function Appointment(props) {
 
   const EMPTY = "EMPTY";
@@ -38,7 +36,7 @@ export default function Appointment(props) {
     }
   }, [transition, mode, props.interview])
 
-
+  // save and deleteApp have dependency on useApplicationData
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -54,7 +52,6 @@ export default function Appointment(props) {
         transition(SHOW)
       })
       .catch(error => {
-        console.log("error.mesage: ", error.message)
         transition(ERROR_SAVE, true)
       })
   }
@@ -66,11 +63,9 @@ export default function Appointment(props) {
       .delete(`http://localhost:8001/api/appointments/${props.id}`)
       .then(response => {
         props.cancelInterview(props.id)
-        console.log('axios confirm deleted ', response);
         transition(EMPTY)
       })
       .catch(err => transition(ERROR_DELETE, true))
-    console.log('error');
   }
 
 
@@ -92,17 +87,12 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer.name}
           student={props.interview.student}
           onEdit={() => {
-            console.log('pressed edit');
             transition(EDIT)
           }}
           onDelete={() => {
-            console.log('pressed delete');
             transition(CONFIRM)
           }}
-
         />
-
-        
       }
       {
         mode === CREATE &&
@@ -121,7 +111,6 @@ export default function Appointment(props) {
           onConfirm={deleteApp}
           onCancel={back}
         />
-
       }
       {
         mode === SAVING &&

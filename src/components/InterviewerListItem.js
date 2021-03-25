@@ -4,14 +4,13 @@ const classNames = require('classnames');
 
 
 export default function IntereviewerListItem(props) {
-
+  // props are passed down from the Form componenent
   const 
   { 
     selected, 
     avatar, 
     name, 
     setInterviewer 
-
   } = props;
 
   const InterviewerListItemClass = classNames(
@@ -19,7 +18,6 @@ export default function IntereviewerListItem(props) {
     'interviewers__item--selected': selected,
 
   })
-  console.log('selected ===>', name);
 
   return (
     <li className={InterviewerListItemClass} 

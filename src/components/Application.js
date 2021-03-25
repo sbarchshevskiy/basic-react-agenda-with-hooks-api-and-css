@@ -8,9 +8,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'help
 import  useApplicationData from '../hooks/useApplicationData';
 
 import DayList from "./DayList";
-import InterviewerList from "./InterviewerList"
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
 
 
 export default function Application(props) {
@@ -23,18 +21,14 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-
+  // comes from selectors.js
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
-
-  console.log('interviewers in app.js: ',interviewers)
-  console.log('state => ', state, 'state.day => ', state.day)
 
 
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    console.log('appointment from ap: ', appointment);
     return (
       <Appointment
         key={appointment.id}
@@ -47,9 +41,6 @@ export default function Application(props) {
       />
     );
   });
-
-  console.log('schedule: ',schedule);
-
 
 
   return (

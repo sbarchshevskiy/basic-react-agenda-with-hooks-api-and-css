@@ -34,8 +34,6 @@ export function getInterview(state, interview) {
 export function getInterviewersForDay(state, day) {
 
   const aptsForDay = state.days.find(findDay => findDay.name === day)
-  console.log('aptsForDay: ',aptsForDay);
-  console.log('state - selectors : ',state);
 
 
   if (aptsForDay === undefined){
@@ -43,7 +41,6 @@ export function getInterviewersForDay(state, day) {
   } else {
     const interviewers = aptsForDay.interviewers.map(aptId =>
       state.interviewers[aptId])
-      console.log('interviewers: ',interviewers);
 
       return interviewers;
   }

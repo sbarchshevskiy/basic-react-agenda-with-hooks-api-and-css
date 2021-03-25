@@ -4,8 +4,6 @@ import DayListItem from './DayListItem';
 
 export default function DayList(props) {
 
-  console.log('set day props from DayList', props.setDay);
-
    return (
       <ul className="DayListItem">
         {

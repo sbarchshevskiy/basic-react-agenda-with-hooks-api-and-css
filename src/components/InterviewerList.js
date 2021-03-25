@@ -8,7 +8,6 @@ import InterviewerListItem from './InterviewerListItem';
 function InterviewerList(props) {
 
   
-  console.log('props from inter.list ',props);
   const interviewersCurated = props.interviewers.map(int => (
     <InterviewerListItem
       key={int.id}
