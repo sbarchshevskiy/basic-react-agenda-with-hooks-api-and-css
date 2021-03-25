@@ -21,12 +21,9 @@ visit: https://github.com/lighthouse-labs/scheduler-api
 
 ## Running Database Server
 Follow the instructions provided and run the server on localhost:8001
-
-This app was designed in pre-historic smart-phone era, and built in 2021, as a learning activity. 
-It by no means serve any viable purpose. Took 11 days to build, and should take no longer than 11 seconds to view the screenshots attached below.
-
+This app was made for learning purposes to understand React. 
 Thank you!
 
 
-![Screenshot](Screen Shot 2021-03-24 at 11.26.56 PM.png)
-![Screenshot](Screen Shot 2021-03-24 at 11.26.14 PM.png)
+![Screenshot](cap1.png)
+![Screenshot](cap2.png)
