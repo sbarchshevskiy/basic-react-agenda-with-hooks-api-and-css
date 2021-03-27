@@ -44,7 +44,7 @@ export default function Appointment(props) {
     };
     transition(SAVING);
     axios
-      .put(`http://localhost:8001/api/appointments/${props.id}`, {
+      .put(`/api/appointments/${props.id}`, {
         interview
       })
       .then(response => {
@@ -60,7 +60,7 @@ export default function Appointment(props) {
   function deleteApp() {
     transition(DELETE, true)
     axios
-      .delete(`http://localhost:8001/api/appointments/${props.id}`)
+      .delete(`/api/appointments/${props.id}`)
       .then(response => {
         props.cancelInterview(props.id)
         transition(EMPTY)

@@ -3,7 +3,6 @@ import './DayListItem.scss';
 
 const classNames = require('classnames');
 
-
 export default function DayListItem(props) {
 
   const {selected, spots, name } = props;
@@ -27,7 +26,5 @@ export default function DayListItem(props) {
       <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{formatSpots(spots)}</h3>
     </li>
-
   );
-
 }

@@ -19,8 +19,9 @@ npm start and visit your browser on localhost:8000
 
 visit: https://github.com/lighthouse-labs/scheduler-api
 
-## Running Database Server
 Follow the instructions provided and run the server on localhost:8001
+
+
 This app was made for learning purposes to understand React. 
 Thank you!
 

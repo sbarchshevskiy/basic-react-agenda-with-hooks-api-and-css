@@ -1,9 +1,5 @@
 import React from "react";
-
-import { fireEvent } from "@testing-library/react";
-
-import { render, cleanup } from "@testing-library/react";
-
+import { fireEvent, render, cleanup } from "@testing-library/react";
 import Form from "components/Appointment/Form";
 
 afterEach(cleanup);
@@ -78,7 +74,6 @@ describe("Form", () => {
     );
 
     fireEvent.click(getByText("Save"));
-
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
     });
@@ -86,9 +81,7 @@ describe("Form", () => {
     fireEvent.click(getByText("Cancel"));
 
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
-
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
-
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });

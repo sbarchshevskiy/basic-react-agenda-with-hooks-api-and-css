@@ -8,7 +8,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'help
 import  useApplicationData from '../hooks/useApplicationData';
 
 import DayList from "./DayList";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
 export default function Application(props) {
