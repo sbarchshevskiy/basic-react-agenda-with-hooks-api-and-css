@@ -26,5 +26,5 @@ This app was made for learning purposes to understand React.
 Thank you!
 
 
-![Screenshot](cap1.png)
-![Screenshot](cap2.png)
+![Screenshot](/screenshots/cap1.png)
+![Screenshot](/screenshots/cap2.png)
